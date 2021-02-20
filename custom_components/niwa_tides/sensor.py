@@ -84,6 +84,12 @@ class NiwaTidesInfoSensor(RestoreEntity):
         self._lon = lon
         self._key = key
         self.data = None
+        self.tide_percent = None
+        self.current_tide_level = None
+        self.last_tide = None
+        self.next_tide = None
+        self.next_high_tide = None
+        self.next_low_tide = None
 
     @property
     def name(self):
@@ -135,7 +141,7 @@ class NiwaTidesInfoSensor(RestoreEntity):
     def update(self):
         """Get the latest data from NIWA Tides API or calculate."""
 
-        if self.data == None or datetime.datetime.now() > self.next_tide_time:
+        if self.data == None or self.next_tide == None or datetime.datetime.now() > self.next_tide.time:
             # never updated, or it's time to get next tide info            
             start = datetime.date.fromtimestamp(time.time()).isoformat()
             _LOGGER.info("Fetching tide data for %s", start)
