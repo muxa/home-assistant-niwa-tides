@@ -1,0 +1,8 @@
+{
+  "domain": "niwa_tides",
+  "name": "NIWA Tides",
+  "documentation": "https://github.com/muxa/home-assistant-niwa-tides",
+  "dependencies": [],
+  "codeowners": ["@muxa"],
+  "requirements": []
+}
