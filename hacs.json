@@ -2,5 +2,6 @@
     "name": "NIWA Tides",
     "domains": "sensor",
     "iot_class": ["Cloud Polling", "Assumed State"],
-    "country": "NZ"
+    "country": "NZ",
+    "render_readme": true
   }
