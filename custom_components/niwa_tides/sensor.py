@@ -203,14 +203,18 @@ class NiwaTidesInfoSensor(RestoreEntity):
                     break
 
             # now can calculate current level
-            tide_percent = (1-math.cos(math.pi*(t-last_tide.time)/(next_tide.time-last_tide.time)))/2
-            h = last_tide.value + (next_tide.value - last_tide.value)*tide_percent
+            tide_ratio = (1-math.cos(math.pi*(t-last_tide.time)/(next_tide.time-last_tide.time)))/2
+            h = last_tide.value + (next_tide.value - last_tide.value)*tide_ratio
             h = round(h, 2)
 
             _LOGGER.debug("Current tide: %s. Last tide: %s. Next tide: %s", h, last_tide, next_tide)
             _LOGGER.debug("Next high tide: %s. Next low tide: %s", next_high_tide, next_low_tide)
 
-            self.tide_percent = round(tide_percent * 100, 0)
+            if last_tide.value > next_tide.value:
+                # tide is decreasing
+                tide_ratio = 1 - tide_ratio
+
+            self.tide_percent = round(tide_ratio * 100, 0)
             self.current_tide_level = h
             self.last_tide = last_tide
             self.next_tide = next_tide
