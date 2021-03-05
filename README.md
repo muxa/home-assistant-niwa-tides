@@ -30,12 +30,16 @@ The sensor also provides additional data via attributes:
 | :-------------------- | :------------------ | :----------- |
 | `last_tide_level`     | 1.03                | height of the tide (high or low) immediately preceeding current time.
 | `last_tide_time`      | 2021-02-21T09:07:00 | time of the tide (high or low) immediately preceeding current time.
+| `last_tide_hours`     | 1.2                 | number of hours since last tide (high or low).
 | `next_tide_level`     | 2.64                | height of the tide (high or low) immediately following current time.
 | `next_tide_time`      | 2021-02-21T15:14:00 | time of the tide (high or low) immediately following current time.
+| `next_tide_hours`     | 4.9                 | number of hours until next tide (high or low).
 | `next_high_tide_level`| 2.64                | height of the high tide immediately following current time.
 | `next_high_tide_time` | 2021-02-21T15:14:00 | time of the high tide immediately following current time.
+| `next_high_tide_hours`| 4.9                 | number of hours until next high tide.
 | `next_low_tide_level` | 0.86                | height of the low tide immediately following current time.
 | `next_low_tide_time`  | 2021-02-21T21:34:00 | time of the low tide immediately following current time.
+| `next_low_tide_hours` | 11.1                | number of hours until next low tide.
 | `tide_percent`        | 18                  | current tide leve in percentages (%0 = low tide, 100% = high tide).
 | `tide_phase`          | increasing          | current phase of the tide with possible values: `low` (<5%), `increasing`, `high` (>95%), `decreasing`.
 

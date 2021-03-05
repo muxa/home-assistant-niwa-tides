@@ -31,12 +31,16 @@ DEFAULT_ENTITY_ID = "niwa_tides"
 ICON = "mdi:waves"
 ATTR_LAST_TIDE_LEVEL = "last_tide_level"
 ATTR_LAST_TIDE_TIME = "last_tide_time"
+ATTR_LAST_TIDE_HOURS = "last_tide_hours"
 ATTR_NEXT_TIDE_LEVEL = "next_tide_level"
 ATTR_NEXT_TIDE_TIME = "next_tide_time"
+ATTR_NEXT_TIDE_HOURS = "next_tide_hours"
 ATTR_NEXT_HIGH_TIDE_LEVEL = "next_high_tide_level"
 ATTR_NEXT_HIGH_TIDE_TIME = "next_high_tide_time"
+ATTR_NEXT_HIGH_TIDE_HOURS = "next_high_tide_hours"
 ATTR_NEXT_LOW_TIDE_LEVEL = "next_low_tide_level"
 ATTR_NEXT_LOW_TIDE_TIME = "next_low_tide_time"
+ATTR_NEXT_LOW_TIDE_HOURS = "next_low_tide_hours"
 ATTR_TIDE_PERCENT = "tide_percent"
 ATTR_TIDE_PHASE = "tide_phase"
 
@@ -118,16 +122,23 @@ class NiwaTidesInfoSensor(RestoreEntity):
     @property
     def device_state_attributes(self):
         """Return the state attributes of this device."""
+        if self.last_update_at == None:
+            self.last_update_at = datetime.datetime.now()
+
         attr = {
             ATTR_ATTRIBUTION: ATTRIBUTION,
             ATTR_LAST_TIDE_LEVEL: self.last_tide.value if self.last_tide is not None else None,
             ATTR_LAST_TIDE_TIME: self.last_tide.time if self.last_tide is not None else None,
+            ATTR_LAST_TIDE_HOURS: difference_in_hours(self.last_tide.time, self.last_update_at) if self.last_tide is not None else None,
             ATTR_NEXT_TIDE_LEVEL: self.next_tide.value if self.next_tide is not None else None,
             ATTR_NEXT_TIDE_TIME: self.next_tide.time if self.next_tide is not None else None,
+            ATTR_NEXT_TIDE_HOURS: difference_in_hours(self.last_update_at, self.next_tide.time) if self.next_tide is not None else None,
             ATTR_NEXT_HIGH_TIDE_LEVEL: self.next_high_tide.value if self.next_high_tide is not None else None,
             ATTR_NEXT_HIGH_TIDE_TIME: self.next_high_tide.time if self.next_high_tide is not None else None,
+            ATTR_NEXT_HIGH_TIDE_HOURS: difference_in_hours(self.last_update_at, self.next_high_tide.time) if self.next_high_tide is not None else None,
             ATTR_NEXT_LOW_TIDE_LEVEL: self.next_low_tide.value if self.next_low_tide is not None else None,
             ATTR_NEXT_LOW_TIDE_TIME: self.next_low_tide.time if self.next_low_tide is not None else None,
+            ATTR_NEXT_LOW_TIDE_HOURS: difference_in_hours(self.last_update_at, self.next_low_tide.time) if self.next_low_tide is not None else None,
             ATTR_TIDE_PERCENT: self.tide_percent,
             ATTR_TIDE_PHASE: self.tide_phase
         }
@@ -140,6 +151,8 @@ class NiwaTidesInfoSensor(RestoreEntity):
         
     def update(self):
         """Get the latest data from NIWA Tides API or calculate."""
+
+        self.last_update_at = datetime.datetime.now()
 
         if self.data == None or self.next_tide == None or datetime.datetime.now() > self.next_tide.time:
             # never updated, or it's time to get next tide info            
@@ -245,3 +258,8 @@ class TideInfo:
 
     def __str__(self):
         return f'{self.value}m at {self.time}'
+
+
+def difference_in_hours(earlier_time, later_time):        
+    diff = later_time - earlier_time
+    return round(diff.days*24 + diff.seconds/3600, 1)
