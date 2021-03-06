@@ -1,3 +1,5 @@
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg?style=for-the-badge)](https://github.com/custom-components/hacs)
+
 # NIWA Tides integeration for Home Assistant
 
 Custom integration for Home Assistant to get New Zealand tide information from NIWA Tides API.
