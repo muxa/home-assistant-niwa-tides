@@ -42,6 +42,6 @@ The sensor also provides additional data via attributes:
 | `next_low_tide_level` | 0.86                | height of the low tide immediately following current time.
 | `next_low_tide_time`  | 2021-02-21T21:34:00 | time of the low tide immediately following current time.
 | `next_low_tide_hours` | 11.1                | number of hours until next low tide.
-| `tide_percent`        | 18                  | current tide leve in percentages (%0 = low tide, 100% = high tide).
+| `tide_percent`        | 18                  | current tide level in percentages (%0 = low tide, 100% = high tide).
 | `tide_phase`          | increasing          | current phase of the tide with possible values: `low` (<5%), `increasing`, `high` (>95%), `decreasing`.
 
