@@ -22,6 +22,13 @@ sensor:
     name: Local Tides
 ```
 
+NIWA API requires GPS coordinates. Your configured location will be used by default. If you want to specify a custom location use these additional configuration parameters:
+
+```yaml
+    latitude: -36.827346
+    longitude: 174.814636
+```
+
 # Sensor
 
 The sensor provides current tide level (in meters). Sensor updates its state every 5 minutes, calculating the level from low and high levels obtained from the API. The API call is only made once every change of tide.
