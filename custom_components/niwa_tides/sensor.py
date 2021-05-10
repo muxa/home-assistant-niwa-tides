@@ -69,12 +69,12 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
         _LOGGER.error("Latitude or longitude not set in Home Assistant config")
 
     tides = NiwaTidesInfoSensor(name, entity_id, lat, lon, key)
+
+    add_entities([tides])
+
     tides.update()
     if tides.data == None:
         _LOGGER.error("Unable to retrieve tides data")
-        return
-
-    add_entities([tides])
 
 
 class NiwaTidesInfoSensor(RestoreEntity):
