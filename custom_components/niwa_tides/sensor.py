@@ -120,7 +120,7 @@ class NiwaTidesInfoSensor(RestoreEntity):
         return LENGTH_METERS
 
     @property
-    def device_state_attributes(self):
+    def extra_state_attributes(self):
         """Return the state attributes of this device."""
         if self.last_update_at == None:
             self.last_update_at = datetime.datetime.now()
