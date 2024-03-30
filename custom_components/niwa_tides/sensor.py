@@ -17,7 +17,7 @@ from homeassistant.const import (
     CONF_LONGITUDE,
     CONF_NAME,
     CONF_ENTITY_ID,
-    LENGTH_METERS
+    UnitOfLength
 )
 import homeassistant.helpers.config_validation as cv
 # from homeassistant.helpers.entity import Entity
@@ -117,7 +117,7 @@ class NiwaTidesInfoSensor(RestoreEntity):
     @property
     def unit_of_measurement(self):
         """Return the unit of measurement."""
-        return LENGTH_METERS
+        return UnitOfLength.METERS
 
     @property
     def extra_state_attributes(self):
