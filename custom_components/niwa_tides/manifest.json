@@ -1,7 +1,7 @@
 {
   "domain": "niwa_tides",
   "name": "NIWA Tides",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "documentation": "https://github.com/muxa/home-assistant-niwa-tides",
   "issue_tracker": "https://github.com/muxa/home-assistant-niwa-tides/issues",
   "dependencies": [],
